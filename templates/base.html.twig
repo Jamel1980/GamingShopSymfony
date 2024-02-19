@@ -12,9 +12,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Gabarito&family=Heebo:wght@600&family=Montserrat:wght@300&family=Noto+Sans&family=Pixelify+Sans:wght@500&family=Poppins:wght@200;400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
-    <script src="service/script_mobile.js"></script>
-    <script src="service/script.js"></script>
-    <script src="service/script_navbar.js"></script>
+    <script src="{{asset('customjs/script_mobile.js')}}"></script>
+    <script src="{{asset('customjs/script.js')}}"></script>
+    <script src="{{asset('customjs/script_navbar.js')}}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
     <title>Document</title>
 </head>
@@ -163,7 +163,7 @@
                         </div>
                     </div>
                     <div class="card_primary">
-                        <img src="{{('image-site-vitrine/PS5-copie.jpg')}}" class="card-img-top" alt="...">
+                        <img src="{{asset('image-site-vitrine/PS5-copie.jpg')}}" class="card-img-top" alt="...">
                         <div class="card_body">
                         <h5 class="card-titre">PS5</h5>
                         <p class="card-texte">Plongez dans le futur univers du gaming avec la nouvelle PS5 standard ou la Playstation 5 Digital Edition d'un design à couper le souffle!</p>
@@ -171,7 +171,7 @@
                         </div>
                     </div>
                     <div class="card_primary">
-                        <img src="{{('image-site-vitrine/halo-infinite-photo.jpg')}}" class="card-img-top" alt="...">
+                        <img src="{{asset('image-site-vitrine/halo-infinite-photo.jpg')}}" class="card-img-top" alt="...">
                         <div class="card_body">
                         <h5 class="card-titre">HALO INFINITE</h5>
                         <p class="card-texte">La légendaire série Halo est de retour. Découvrez la plus vaste campagne Master Chief jamais proposée et vivez une expérience multijoueur gratuite.</p>
@@ -206,7 +206,7 @@
                 <div class="titrebest2">NOUVEAUTES</div>
                 <div class="containers_carrousels">
                     <div class="card_primary">
-                        <img src="{{('image-site-vitrine/pack-xbox.jpeg')}}" class="card-img-top" alt="...">
+                        <img src="{{asset('image-site-vitrine/pack-xbox.jpeg')}}" class="card-img-top" alt="...">
                         <div class="card_body">
                         <h5 class="card-titre">PACK XBOX SERIES X</h5>
                         <p class="card-texte">Microsoft Xbox Series X. Plateforme: Xbox Series X, Couleur du produit: Noir, Mémoire interne: 16384 Mo. Supports de stockage: SSD.</p>
@@ -214,7 +214,7 @@
                         </div>
                     </div>
                     <div class="card_primary">
-                        <img src="{{('image-site-vitrine/mario_kart_8.jpeg')}}" class="card-img-top" alt="...">
+                        <img src="{{asset('image-site-vitrine/mario_kart_8.jpeg')}}" class="card-img-top" alt="...">
                         <div class="card_body">
                         <h5 class="card-titre">MARIO KART 8</h5>
                         <p class="card-texte">Mario et toute son équipe vous attendent pour de nouvelles aventures sur nintendo. Le multijoueur par excellence, seul ou avec des amis.</p>
@@ -257,6 +257,6 @@
             </div>
         </div>
     </section>
-
+    <?php {% include "footer.php" %} ?>
 </body>
 </html>

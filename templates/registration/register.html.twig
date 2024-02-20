@@ -1,32 +1,24 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}Register{% endblock %}
+
 {% block body %}
-	<div class="vh-150 w-100 d-flex justify-content-center align-items-center bg-dark text-light p-3">
-		<div class="row justify-content-center">
-			<div class="">
-<form class="radius-10 shadow-lg p-4">
-    <h1>INSCRIPTION</h1>
+<div class="d-flex justify-content-center">
+    <h1>Register</h1>
 
     {{ form_errors(registrationForm) }}
 
-    {{ form_start(registrationForm, {'attr': {'class': ''}}) }}
-    <div class="form-group">
-        {{ form_label(registrationForm.email, 'EMAIL') }}
-        {{ form_widget(registrationForm.email, {'attr': {'class': ''}}) }}
-    </div>
-    <div class="form-group">
-        {{ form_label(registrationForm.plainPassword, 'MOT DE PASSE', {'attr': {'class': ''}}) }}
-        {{ form_widget(registrationForm.plainPassword, {'attr': {'class': ''}}) }}
-    </div>
-    <div class="form-group">
-        {{ form_widget(registrationForm.agreeTerms, {'attr': {'class': ''}}) }}
-        {{ form_label(registrationForm.agreeTerms, 'Accepter les conditions') }}
-    </div>
+    {{ form_start(registrationForm) }}
+     {{ form_label(registrationForm.email, 'EMAIL') }}
+        {{ form_widget(registrationForm.email) }}
+          {{ form_label(registrationForm.plainPassword, 'MOT DE PASSE', {'attr': {'class': ''}}) }}
+        {{ form_widget(registrationForm.plainPassword, {
+            label: 'Password'
+        }) }}
+           {{ form_label(registrationForm.agreeTerms, 'Accepter les conditions') }}
+        {{ form_widget(registrationForm.agreeTerms) }}
 
-    <button type="submit" class="btn btn-primary">S'INSCRIRE</button>
+        <button type="submit" class="btn">Register</button>
     {{ form_end(registrationForm) }}
-</form>
-			</div>
-		</div>
-	</div>
+    <div>
 {% endblock %}

@@ -105,39 +105,39 @@
 								</li>
 							</ul>
 						</li>
+						{% if app.user.email is defined %}
+							<li>
+								<a href="" style="color: cornflowerblue;">MON COMPTE</a>
+								<ul class="sub-menu">
+									<li>
+										<a href=""></a>
+									</li>
+									<li>
+										<a href="">Changer MDP</a>
+									</li>
+									<li>
+										<a href="{{ path('app_logout') }}">LOGOUT</a>
+									</li>
 
-						<li>
-							<a href="" style="color: cornflowerblue;">MON COMPTE</a>
-							<ul class="sub-menu">
-								<li>
-									<a href=""></a>
-								</li>
-								<li>
-									<a href="">Changer MDP</a>
-								</li>
-								<li>
-									<a href="{{ path('app_logout') }}">LOGOUT</a>
-								</li>
+									<li>
+										<a href="client&action=list">TABLEAU DE BORD</a>
+									</li>
 
-								<li>
-									<a href="client&action=list">TABLEAU DE BORD</a>
-								</li>
-
-							</ul>
-						</li>
-
-						<li>
-							<a href="" style="color: cornflowerblue;">CONNEXION</a>
-							<ul class="sub-menu">
-								<li>
-									<a href="{{ path('app_login') }}">LOGIN</a>
-								</li>
-								<li>
-									<a href="{{ path('app_register') }}">CRÉER COMPTE</a>
-								</li>
-							</ul>
-						</li>
-
+								</ul>
+							</li>
+						{% else  %}
+							<li>
+								<a href="" style="color: cornflowerblue;">CONNEXION</a>
+								<ul class="sub-menu">
+									<li>
+										<a href="{{ path('app_login') }}">LOGIN</a>
+									</li>
+									<li>
+										<a href="{{ path('app_register') }}">CRÉER COMPTE</a>
+									</li>
+								</ul>
+							</li>
+						{% endif %}
 					</ul>
 				</nav>
 			</section>
@@ -309,6 +309,7 @@
 				</div>
 			</div>
 		</section>
-		<?php  ?> {% include "footer.php" %}
+		<?php  ?>
+		{% include "footer.php" %}
 	</body>
 </html>

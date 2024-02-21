@@ -32,7 +32,7 @@
 				<nav class="menu">
 					<ul class="nav-list">
 						<li>
-							<a href="./index.php">JEUX</a>
+							<a href="{{ path('app_home') }}">JEUX</a>
 							<ul class="sub-menu">
 								<li>
 									<a href="#">JEUX PLAYSTATION</a>
@@ -116,7 +116,7 @@
 									<a href="">Changer MDP</a>
 								</li>
 								<li>
-									<a href="">LOGOUT</a>
+									<a href="{{ path('app_logout') }}">LOGOUT</a>
 								</li>
 
 								<li>
@@ -130,10 +130,10 @@
 							<a href="" style="color: cornflowerblue;">CONNEXION</a>
 							<ul class="sub-menu">
 								<li>
-									<a href="/login">LOGIN</a>
+									<a href="{{ path('app_login') }}">LOGIN</a>
 								</li>
 								<li>
-									<a href="/register">CRÉER COMPTE</a>
+									<a href="{{ path('app_register') }}">CRÉER COMPTE</a>
 								</li>
 							</ul>
 						</li>
@@ -181,7 +181,7 @@
 									</div>
 								</div>
 								<div class="carousel-item">
-									<img src="{{('image-site-vitrine/halo-infinite.jpg')}}" class="d-block w-100" alt="...">
+									<img src="{{asset('image-site-vitrine/halo-infinite.jpg')}}" class="d-block w-100" alt="...">
 									<div class="carousel-caption d-none d-md-block">
 										<h5>Halo Infinite</h5>
 										<p class="text-bg-light">Les dernières aventures de Spartan 117 à prix doux !</p>

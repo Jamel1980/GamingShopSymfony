@@ -4,8 +4,9 @@
 {% endblock %}
 
 {% block body %}
-	<h1>User index</h1>
+<h1>User index</h1>
 
+<<<<<<< HEAD
 	<table class="table">
 		<thead>
 			<tr>
@@ -38,3 +39,64 @@
 
 	<a href="{{ path('app_user_new') }}">Nouvel Utilisateur</a>
 {% endblock %}
+=======
+<table class="table">
+
+    <div class="d-flex justify-content-around ">
+        <button class="button-82-pushable" role="button">
+            <span class="button-82-shadow"></span>
+            <span class="button-82-edge"></span>
+            <span class="button-82-front text">
+                Ajouter
+            </span>
+        </button>
+        <button class="button-82-pushable" role="button">
+            <span class="button-82-shadow"></span>
+            <span class="button-82-edge"></span>
+            <span class="button-82-front text">
+                Afficher
+            </span>
+        </button>
+        <button class="button-82-pushable" role="button">
+            <span class="button-82-shadow"></span>
+            <span class="button-82-edge"></span>
+            <span class="button-82-front text">
+                Modifier
+            </span>
+        </button>
+
+
+
+    </div>
+    <thead>
+        <tr>
+            <th></th>
+            <th>Email</th>
+            <th>Roles</th>
+            <th>Password</th>
+            <th>actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for user in users %}
+        <tr>
+            <td><input type="checkbox" class="form-check-input" name="check" onclick="onlyOne(this)"></td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
+            <td>****</td>
+            <td>
+                <a href="{{ path('app_user_show', {'id': user.id}) }}">show</a>
+                <a href="{{ path('app_user_edit', {'id': user.id}) }}">edit</a>
+            </td>
+        </tr>
+        {% else %}
+        <tr>
+            <td colspan="5">no records found</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<a href="{{ path('app_user_new') }}">Create new</a>
+{% endblock %}
+>>>>>>> origin/checkbox

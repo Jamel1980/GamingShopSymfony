@@ -11,6 +11,7 @@
         <a href="javascript:add()" class="btn btn-sm btn-success">Ajouter</a>
         <a href="javascript:show()" class="btn btn-sm btn-primary">Afficher</a>
         <a href="javascript:modify()" class="btn btn-sm btn-secondary">Modifier</a>
+
     </div>
     <h1 class="text-center">User index</h1>
     <thead>
@@ -45,28 +46,32 @@
 <script>
     const modify = () => {
         let id = getIdChecked('check');
-        if(id==0){
+        if (id == 0) {
             alert("Please select Client to modify");
         } else {
             let url = "{{path('app_user_edit',{'id':'id'})}}"
-            url = url.replace('id',id);
+            url = url.replace('id', id);
             document.location.href = url;
         }
     }
-    const add =() =>{
-        document.location.href="{{path('app_user_new')}}";
+    const add = () => {
+        document.location.href = "{{path('app_user_new')}}";
     }
 
-        const show = () => {
-            let id = getIdChecked('check');
-            if (id == 0) {
-                alert("Choisir ligne");
-            } else {
-                let url = "{{ path('app_user_show', {'id': 'id'}) }}";
-                url = url.replace('id', id);
-                window.location.href = url;
-            }
+    const show = () => {
+        let id = getIdChecked('check');
+        if (id == 0) {
+            alert("Choisir ligne");
+        } else {
+            let url = "{{ path('app_user_show', {'id': 'id'}) }}";
+            url = url.replace('id', id);
+            window.location.href = url;
         }
+    }
+
+
+
+
 </script>
 {% endblock %}
 {% endblock %}

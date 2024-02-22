@@ -26,7 +26,9 @@ class RegistrationController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $client = new Client();
-            $client->setNom($form->get('nom')->getData());
+            $nom = $form->get('nom')->getData();
+            $client->setNom($nom);
+            // $client->setNom($form->get('nom')->getData());
             $client->setPrenom($form->get('prenom')->getData());
             $user->setClient($client);
             // encode the plain password

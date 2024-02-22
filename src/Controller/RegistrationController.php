@@ -3,16 +3,17 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Entity\Client;
 use App\Form\RegistrationFormType;
 use App\Security\SecurityAuthenticator;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Attribute\Route;
-use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
 
 class RegistrationController extends AbstractController
 {
@@ -24,6 +25,10 @@ class RegistrationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $client = new Client();
+            $client->setNom($form->get('nom')->getData());
+            $client->setPrenom($form->get('prenom')->getData());
+            $user->setClient($client);
             // encode the plain password
             $user->setPassword(
                 $userPasswordHasher->hashPassword(

@@ -1,47 +1,65 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}User index
-{% endblock %}
+{% block title %}User index{% endblock %}
 
 {% block body %}
 
+    <h1 class="text-center py-5 ">TABLEAU DE BORD USERS</h1>
 
-<table class="table">
-    <div class="d-flex justify-content-around m-2">
-        <a href="javascript:add()" class="btn btn-sm btn-success">Ajouter</a>
-        <a href="javascript:show()" class="btn btn-sm btn-primary">Afficher</a>
-        <a href="javascript:modify()" class="btn btn-sm btn-secondary">Modifier</a>
-
-    </div>
-    <h1 class="text-center">User index</h1>
-    <thead>
-        <tr>
-            <th></th>
-            <th>id</th>
-            <th>Email</th>
-            <th>Roles</th>
-            <th>Password</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for user in users %}
-        <tr>
-            <td><input type="checkbox" class="form-check-input" name="check" id="{{user.id}}" value="{{user.id}}"
-                    onclick="onlyOne(this)"></td>
-            <td>{{user.id}}</td>
-            <td>{{ user.email }}</td>
-            <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
-            <td>****</td>
-        </tr>
-        {% else %}
-        <tr>
-            <td colspan="5">no records found</td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
-
-
+    <table class="table">
+        <div class="button-container">
+            <div class="d-flex justify-content-around ">
+                <button class="button-82-pushable" role="button" onclick="add()">
+                    <span class="button-82-shadow"></span>
+                    <span class="button-82-edge"></span>
+                    <span class="button-82-front text">
+                        <a class="text-light" href="{{ path('app_user_new') }}">Ajouter</a>
+                    </span>
+                </button>
+                <button class="button-82-pushable" role="button" onclick="show()">
+                    <span class="button-82-shadow"></span>
+                    <span class="button-82-edge"></span>
+                    <span class="button-82-front text">
+                        Afficher
+                    </span>
+                </button>
+                <button class="button-82-pushable" role="button" onclick="modify()">
+                    <span class="button-82-shadow"></span>
+                    <span class="button-82-edge"></span>
+                    <span class="button-82-front text">
+                        Modifier
+                    </span>
+                </button>
+            </div>
+        </div>
+	</table>
+ <div class="table-responsive">
+        <table class="table table-bordered table-striped text-center">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Roles</th>
+                    <th scope="col">Password</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                <tr>
+                    <th scope="row"><input type="checkbox" class="form-check-input" name="check" onclick="onlyOne(this)"></th>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
+                    <td>****</td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="5">Aucun enregistrement trouvé</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+</div>
 {% block script %}
 <script>
     const modify = () => {

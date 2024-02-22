@@ -3,33 +3,61 @@
 {% block title %}Role index{% endblock %}
 
 {% block body %}
-    <h1>Role index</h1>
+    <h1 class="text-center py-5">TABLEAU DE BORD ROLES</h1>
 
     <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Nom_role</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for role in roles %}
-            <tr>
-                <td>{{ role.id }}</td>
-                <td>{{ role.nomRole }}</td>
-                <td>
-                    <a href="{{ path('app_role_show', {'id': role.id}) }}">show</a>
-                    <a href="{{ path('app_role_edit', {'id': role.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="3">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
+      <div class="button-container">
+            <div class="d-flex justify-content-around ">
+                <button class="button-82-pushable" role="button">
+                    <span class="button-82-shadow"></span>
+                    <span class="button-82-edge"></span>
+                    <span class="button-82-front text">
+                        <a class="text-light" href="{{ path('app_role_new') }}">Ajouter</a>
+                    </span>
+                </button>
+                <button class="button-82-pushable" role="button">
+                    <span class="button-82-shadow"></span>
+                    <span class="button-82-edge"></span>
+                    <span class="button-82-front text">
+                        Afficher
+                    </span>
+                </button>
+                <button class="button-82-pushable" role="button">
+                    <span class="button-82-shadow"></span>
+                    <span class="button-82-edge"></span>
+                    <span class="button-82-front text">
+                        Modifier
+                    </span>
+                </button>
+            </div>
+        </div>
     </table>
+    <div class="table-responsive">
+            <table class="table table-bordered table-striped text-center">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Nom_role</th>
+                    <th scope="col">actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for role in roles %}
+                <tr>
+                    <td>{{ role.id }}</td>
+                    <td>{{ role.nomRole }}</td>
+                    <td>
+                        <a href="{{ path('app_role_show', {'id': role.id}) }}">show</a>
+                        <a href="{{ path('app_role_edit', {'id': role.id}) }}">edit</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="3">Aucun enregistrement trouvé</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+            </table>
+    </div>
 
-    <a href="{{ path('app_role_new') }}">Create new</a>
 {% endblock %}

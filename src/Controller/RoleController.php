@@ -42,9 +42,10 @@ class RoleController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_role_show', methods: ['GET'])]
+    #[Route('/show/{id}', name: 'app_role_show', methods: ['GET'])]
     public function show(Role $role): Response
     {
+
         return $this->render('role/show.html.twig', [
             'role' => $role,
         ]);

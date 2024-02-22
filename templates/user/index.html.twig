@@ -4,56 +4,33 @@
 {% endblock %}
 
 {% block body %}
-<h1>User index</h1>
+
 
 <table class="table">
-
-    <div class="d-flex justify-content-around ">
-        <button class="button-82-pushable" role="button">
-            <span class="button-82-shadow"></span>
-            <span class="button-82-edge"></span>
-            <span class="button-82-front text">
-                Ajouter
-            </span>
-        </button>
-        <button class="button-82-pushable" role="button">
-            <span class="button-82-shadow"></span>
-            <span class="button-82-edge"></span>
-            <span class="button-82-front text">
-                Afficher
-            </span>
-        </button>
-        <button class="button-82-pushable" role="button">
-            <span class="button-82-shadow"></span>
-            <span class="button-82-edge"></span>
-            <span class="button-82-front text">
-                Modifier
-            </span>
-        </button>
-
-
-
+    <div class="d-flex justify-content-around m-2">
+        <a href="javascript:add()" class="btn btn-sm btn-success">Ajouter</a>
+        <a href="javascript:show()" class="btn btn-sm btn-primary">Afficher</a>
+        <a href="javascript:modify()" class="btn btn-sm btn-secondary">Modifier</a>
     </div>
+    <h1 class="text-center">User index</h1>
     <thead>
         <tr>
             <th></th>
+            <th>id</th>
             <th>Email</th>
             <th>Roles</th>
             <th>Password</th>
-            <th>actions</th>
         </tr>
     </thead>
     <tbody>
         {% for user in users %}
         <tr>
-            <td><input type="checkbox" class="form-check-input" name="check" onclick="onlyOne(this)"></td>
+            <td><input type="checkbox" class="form-check-input" name="check" id="{{user.id}}" value="{{user.id}}"
+                    onclick="onlyOne(this)"></td>
+            <td>{{user.id}}</td>
             <td>{{ user.email }}</td>
             <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
             <td>****</td>
-            <td>
-                <a href="{{ path('app_user_show', {'id': user.id}) }}">show</a>
-                <a href="{{ path('app_user_edit', {'id': user.id}) }}">edit</a>
-            </td>
         </tr>
         {% else %}
         <tr>
@@ -63,5 +40,33 @@
     </tbody>
 </table>
 
-<a href="{{ path('app_user_new') }}">Create new</a>
+
+{% block script %}
+<script>
+    const modify = () => {
+        let id = getIdChecked('check');
+        if(id==0){
+            alert("Please select Client to modify");
+        } else {
+            let url = "{{path('app_user_edit',{'id':'id'})}}"
+            url = url.replace('id',id);
+            document.location.href = url;
+        }
+    }
+    const add =() =>{
+        document.location.href="{{path('app_user_new')}}";
+    }
+
+        const show = () => {
+            let id = getIdChecked('check');
+            if (id == 0) {
+                alert("Choisir ligne");
+            } else {
+                let url = "{{ path('app_user_show', {'id': 'id'}) }}";
+                url = url.replace('id', id);
+                window.location.href = url;
+            }
+        }
+</script>
+{% endblock %}
 {% endblock %}

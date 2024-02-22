@@ -1,64 +1,91 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Role index{% endblock %}
+{% block title %}Role index
+{% endblock %}
 
 {% block body %}
-    <h1 class="text-center py-5">TABLEAU DE BORD ROLES</h1>
+<h1 class="text-center py-5">TABLEAU DE BORD ROLES</h1>
 
-    <table class="table">
-      <div class="button-container">
-            <div class="d-flex justify-content-around ">
-                <button class="button-82-pushable" role="button">
-                    <span class="button-82-shadow"></span>
-                    <span class="button-82-edge"></span>
-                    <span class="button-82-front text">
-                        <a class="text-light" href="{{ path('app_role_new') }}">Ajouter</a>
-                    </span>
-                </button>
-                <button class="button-82-pushable" role="button">
-                    <span class="button-82-shadow"></span>
-                    <span class="button-82-edge"></span>
-                    <span class="button-82-front text">
-                        Afficher
-                    </span>
-                </button>
-                <button class="button-82-pushable" role="button">
-                    <span class="button-82-shadow"></span>
-                    <span class="button-82-edge"></span>
-                    <span class="button-82-front text">
-                        Modifier
-                    </span>
-                </button>
-            </div>
+<table class="table">
+    <div class="button-container">
+        <div class="d-flex justify-content-around">
+            <button class="button-82-pushable" role="button">
+                <span class="button-82-shadow"></span>
+                <span class="button-82-edge"></span>
+                <span class="button-82-front text">
+                    <a class="text-light" href="{{path('app_role_new')}}">Ajouter</a>
+                </span>
+            </button>
+            <button class="button-82-pushable" role="button" onclick="show()">
+                <span class="button-82-shadow"></span>
+                <span class="button-82-edge"></span>
+                <span class="button-82-front text">
+                    Afficher
+                </span>
+            </button>
+            <button class="button-82-pushable" role="button" onclick="modify()">
+                <span class="button-82-shadow"></span>
+                <span class="button-82-edge"></span>
+                <span class="button-82-front text">
+                    Modifier
+                </span>
+            </button>
         </div>
-    </table>
-    <div class="table-responsive">
-            <table class="table table-bordered table-striped text-center">
-                <thead class="thead-dark">
-                <tr>
-                    <th scope="col">Id</th>
-                    <th scope="col">Nom_role</th>
-                    <th scope="col">actions</th>
-                </tr>
-            </thead>
-            <tbody>
-            {% for role in roles %}
-                <tr>
-                    <td>{{ role.id }}</td>
-                    <td>{{ role.nomRole }}</td>
-                    <td>
-                        <a href="{{ path('app_role_show', {'id': role.id}) }}">show</a>
-                        <a href="{{ path('app_role_edit', {'id': role.id}) }}">edit</a>
-                    </td>
-                </tr>
-            {% else %}
-                <tr>
-                    <td colspan="3">Aucun enregistrement trouvé</td>
-                </tr>
-            {% endfor %}
-            </tbody>
-            </table>
     </div>
+</table>
+<div class="table-responsive">
+    <table class="table table-bordered table-striped text-center">
+        <thead class="thead-dark">
+            <tr>
+                <th></th>
+                <th scope="col">Id</th>
+                <th scope="col">Nom_role</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for role in roles %}
+            <tr>
+                <td><input type="checkbox" class="form-check-input" id="{{role.id}}" value="{{role.id}}" name="check"
+                        onclick="onlyOne(this)"></td>
+                <td>{{ role.id }}</td>
+                <td>{{ role.nomRole }}</td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="3">Aucun enregistrement trouvé</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% block script %}
+<script>
+    const modify = () => {
+        let id = getIdChecked('check');
+        if (id == 0) {
+            alert("Please select Client to modify");
+        } else {
+            let url = "{{ path('app_role_edit',{'id':'id'}) }}"
+            url = url.replace('id', id);
+            document.location.href = url;
+        }
+    }
 
+<<<<<<< HEAD
     <a href="{{ path('app_role_new') }}">Create new</a>
+=======
+    const show = () => {
+        let id = getIdChecked('check');
+        if (id == 0) {
+            alert("Choisir ligne");
+        } else {
+            let url = "{{ path('app_role_show', {'id': 'id'}) }}";
+            url = url.replace('id', id);
+            document.location.href = url;
+
+        }
+    }
+</script>
+>>>>>>> origin/newcheckbox
+{% endblock %}
 {% endblock %}

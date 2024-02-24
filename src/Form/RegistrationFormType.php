@@ -18,6 +18,8 @@ class RegistrationFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+        //these nom and prenom we added later to get the value of nom and prenom from the form and set it to the client entity.
+        //only email and password are the fields of user entity.
         ->add('nom',TextType::class,[
             'mapped'=>false,
         ])

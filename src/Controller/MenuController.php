@@ -55,4 +55,13 @@ class MenuController extends AbstractController
         }
         return $html;
     }
+
+    #[Route('/menu/show/{id}', name: 'app_menu_show')]
+    public function show(EntityManagerInterface $em, $id)
+    {
+        $menu = $em->getRepository(Menu::class)->find($id);
+        return $this->render('menu/show.html.twig', [
+            'menu' => $menu
+        ]);
+    }
 }

@@ -4,77 +4,49 @@
 {% endblock %}
 
 {% block body %}
-	{% block stylesheets %}
-		<style>
-			.clear {
-				clear: both;
-			}
-
-			.checkBox {
-				display: block;
-				cursor: pointer;
-				width: 30px;
-				height: 30px;
-				border: 3px solid rgba(255, 255, 255, 0);
-				border-radius: 10px;
-				position: relative;
-				overflow: hidden;
-				box-shadow: 0 0 0 2px black;
-			}
-
-			.checkBox div {
-				width: 60px;
-				height: 60px;
-				background-color: black;
-				top: -52px;
-				left: -52px;
-				position: absolute;
-				transform: rotateZ(45deg);
-				z-index: 100;
-			}
-
-			.checkBox input[type=checkbox]:checked + div {
-				left: -10px;
-				top: -10px;
-			}
-
-			.checkBox input[type=checkbox] {
-				position: absolute;
-				left: 50px;
-				visibility: hidden;
-			}
-
-			.transition {
-				transition: 300ms ease;
-			}
-		</style>
-	{% endblock %}
-	<div class="example-wrapper">
-		<table class="table position-relative">
-			<div class=" d-flex justify-content-between">
-				<a href="javascript:afficher()" class="btn btn-primary btn-sm">Show</a>
-				<a href="javascript:modify()" class="btn btn-success btn-sm">Modify</a>
-				<a href="javascript:supprimer()" class="btn btn-danger btn-sm">Delete</a>
-			</div>
-			<thead>
-				<tr class=" position-sticky">
-					<th></th>
-					<th>LIBELLE</th>
-					<th>URL</th>
-					<th>ICON</th>
-					<th>ROLE</th>
-				</tr>
-			</thead>
+{% block stylesheets %}{% endblock %}
+<div class="example-wrapper">
+    <table class="table position-relative">
+        <div class="button d-flex justify-content-around m-2">
+            <a href="javascript:ajouter()" class="buttonadd">Ajouter</a>
+            <a href="javascript:afficher()" class="buttonshow">Afficher</a>
+            <a href="javascript:modifier()" class="buttonmodify">Modifier</a>
+            <a href="javascript:supprimer()" class="buttondelete">Supprimer</a>
+        </div>
+        <thead>
+            <tr class=" position-sticky">
+                <th></th>
+                <th>LIBELLE</th>
+                <th>URL</th>
+                <th>ICON</th>
+                <th>ROLE</th>
+            </tr>
+        </thead>
 
 
-			<tbody id="tbody_menu">
-				{{menu|raw}}
-			</tbody>
-			<tfoot>
-				<tr>
-					<th colspan="5" class="text-center">Total:</th>
-				</tr>
-			</tfoot>
-		</table>
-	</div>
+        <tbody id="tbody_menu">
+            {{menu|raw}}
+        </tbody>
+        <tfoot>
+            <tr>
+                <th colspan="5" class="text-center">Total:</th>
+            </tr>
+        </tfoot>
+    </table>
+</div>
+{% block script %}
+<script>
+        const afficher = () => {
+            const id = getIdChecked('check');
+            if (id == 0) {
+                alert('please select the menu to show');
+            } else {
+                const url = "{{path('app_menu_show',{'id':'id'})}}";
+                const newUrl = url.replace('id', id);
+                document.location.href = newUrl;
+            }
+        }
+</script>
+{% endblock %}
+
 {% endblock %}

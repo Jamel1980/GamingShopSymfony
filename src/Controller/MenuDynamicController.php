@@ -53,7 +53,7 @@ class MenuDynamicController extends AbstractController
                     $html .= "<ul class='sub-menu'>";
                 }
                 if ($nbreSubMenus != 0) {
-                    $html .= "<li><a href='$href'>$libelle</a>";
+                    $html .= "<li class='mx-5 menu-link'><a href='$href'>$libelle</a>";
                 } else {
                     $html .= "<li><a href='$href'>$icon $libelle</a>";
                 }

@@ -3,7 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Menu;
+use App\Entity\Role;
+use App\Form\MenuType;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -15,9 +18,12 @@ class MenuController extends AbstractController
     {
         $menus = $em->getRepository(Menu::class)->findBy([], ['rang' => 'asc']);
         $menu = $this->list_menu(null, 0, $menus);
+
         return $this->render('menu/index.html.twig', [
             'controller_name' => 'MenuController',
             'menu' => $menu,
+            'menus'=>$menus
+
         ]);
     }
 
@@ -60,8 +66,40 @@ class MenuController extends AbstractController
     public function show(EntityManagerInterface $em, $id)
     {
         $menu = $em->getRepository(Menu::class)->find($id);
+        $roles = $em->getRepository(Role::class)->findAll();
         return $this->render('menu/show.html.twig', [
-            'menu' => $menu
+            'menu' => $menu,
+            'roles' => $roles,
         ]);
+    }
+
+    #[Route('/menu/modify/{id}', name: 'app_menu_modify')]
+    public function modify(EntityManagerInterface $em, Request $request, $id)
+    {
+        $id = (int) $id;
+        if ($id == 0) {
+            $menu = new Menu();
+        } else {
+            $menu = $em->getRepository(Menu::class)->find($id);
+        }
+        $form = $this->createForm(MenuType::class, $menu);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em->persist($menu);
+            $em->flush();
+            return $this->redirectToRoute('app_menu');
+        }
+        return $this->render('menu/form.html.twig', [
+            'form' => $form->createView()
+        ]);
+    }
+
+    #[Route('menu/delete/{id}', name: 'app_menu_delete')]
+    public function delete(EntityManagerInterface $em, $id)
+    {
+        $menu = $em->getRepository(Menu::class)->find($id);
+        $em->remove($menu);
+        $em->flush();
+        return $this->redirectToRoute('app_menu');
     }
 }

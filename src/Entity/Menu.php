@@ -87,7 +87,7 @@ class Menu
         return $this->icon;
     }
 
-    public function setIcon(string $icon): static
+    public function setIcon(?string $icon): static
     {
         $this->icon = $icon;
 

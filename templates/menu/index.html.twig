@@ -36,16 +36,47 @@
 </div>
 {% block script %}
 <script>
-        const afficher = () => {
-            const id = getIdChecked('check');
-            if (id == 0) {
-                alert('please select the menu to show');
-            } else {
-                const url = "{{path('app_menu_show',{'id':'id'})}}";
+
+    const modifier = () => {
+        let id = getIdChecked('check');
+        if (id == 0) {
+            alert('Veuillez sélectionner le menu à modifier')
+        } else {
+            const url = "{{path('app_menu_modify',{'id':'id'})}}";
+            let newUrl = url.replace('id', id);
+            document.location.href = newUrl;
+        }
+    }
+    const afficher = () => {
+        const id = getIdChecked('check');
+        if (id == 0) {
+            alert('Veuillez sélectionner le menu à afficher');
+        } else {
+            const url = "{{path('app_menu_show',{'id':'id'})}}";
+            const newUrl = url.replace('id', id);
+            document.location.href = newUrl;
+        }
+    }
+
+    const ajouter = () => {
+        const url = "{{path('app_menu_modify',{'id':0})}}";
+        document.location.href = url;
+    }
+
+    const supprimer = () => {
+        const id = getIdChecked('check');
+        if (id == 0) {
+            alert('Please select menu to delete');
+        } else {
+            const response = confirm('Do you really want to delete this menu?');
+            if (response) {
+                const url = "{{path('app_menu_delete',{'id':'id'})}}";
                 const newUrl = url.replace('id', id);
                 document.location.href = newUrl;
             }
+
         }
+    }
 </script>
 {% endblock %}
 

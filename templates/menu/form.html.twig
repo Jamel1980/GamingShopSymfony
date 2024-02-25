@@ -1,0 +1,19 @@
+{% extends "base.html.twig" %}
+{% block body %}
+	<div class="d-flex justify-content-center bg-dark p-3">
+		{{ form_start(form) }}
+		{{ form_widget(form) }}
+		<div class="button d-flex justify-content-around m-2 gap-3">
+			<button type="submit" class="buttonshow" onclick="retour()">Retour</button>
+			<button type="submit" class="buttonmodify">Enregistrer</button>
+		</div>
+		{{ form_end(form) }}
+	</div>
+	{% block script %}
+		<script>
+			const retour = () => {
+document.location.href = "{{ path('app_menu') }}";
+}
+		</script>
+	{% endblock %}
+{% endblock %}

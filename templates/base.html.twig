@@ -36,8 +36,48 @@
 						<img src="{{asset('image-site-vitrine/logo_jeux-removebg-preview.png')}}" alt="logo fanatic game" class="logo_size">
 					</div>
 				</div>
-				<nav class="menu">
+				<nav class="menu d-flex justify-content-between">
 					{{render(url('app_menu_dynamic'))}}
+					<ul class="nav-list mx-3">
+						{% if app.user.email is defined %}
+							<li>
+								<a href="" style="color: cornflowerblue;">MON COMPTE</a>
+								<ul class="sub-menu">
+
+									<li>
+										<a href="#">Changer MDP</a>
+									</li>
+									<li>
+										<a href="{{ path('app_logout') }}">LOGOUT</a>
+									</li>
+
+									{% if(is_granted('ROLE_ADMIN'))%}
+										<li>
+											<a href="{{path('app_user_index')}}">USER</a>
+										</li>
+										<li>
+											<a href="{{path('app_role_index')}}">ROLE</a>
+										</li>
+										<li>
+											<a href="{{path('app_menu')}}">Menu</a>
+										</li>
+									{% endif %}
+								</ul>
+							</li>
+						{% else %}
+							<li>
+								<a href="" style="color: cornflowerblue;">CONNEXION</a>
+								<ul class="sub-menu">
+									<li>
+										<a href="{{ path('app_login') }}">LOGIN</a>
+									</li>
+									<li>
+										<a href="{{ path('app_register') }}">CRÉER COMPTE</a>
+									</li>
+								</ul>
+							</li>
+						{% endif %}
+					</ul>
 				</nav>
 			</section>
 			<section class="content-section"> {% block body %}{% endblock %}
@@ -51,7 +91,7 @@
 							<h1>Boutique Jeu Vidéo</h1>
 							<b>
 								<p class="text-bluegaming">Votre boutique référence, les dernières tendances gaming,
-																																																				accessoires, jeux, espace geek...</p>
+																																																																															accessoires, jeux, espace geek...</p>
 							</b>
 						</div>
 					</div>
@@ -70,7 +110,7 @@
 										<div class="carousel-caption d-none d-md-block">
 											<h5>Star Wars Battlefront II</h5>
 											<p class="text-bg-light">Réduction incroyable sur Star Wars Battlefront II à ne
-																																																																						surtout pas rater</p>
+																																																																																																										surtout pas rater</p>
 										</div>
 									</div>
 									<div class="carousel-item">
@@ -78,7 +118,7 @@
 										<div class="carousel-caption d-none d-md-block">
 											<h5>God Of War</h5>
 											<p class="text-bg-light">Rejoignez les aventures incontournables de Kratos à prix
-																																																																						réduits.</p>
+																																																																																																										réduits.</p>
 										</div>
 									</div>
 									<div class="carousel-item">
@@ -111,7 +151,7 @@
 								<div class="card_body">
 									<h5 class="card-titre">THE LAST OF US</h5>
 									<p class="card-texte">La survie à tout prix. Redécouvrez le jeu qui a conquis le cœur des
-																																																										joueurs et avec lequel tout a commencé, recréé pour la console PlayStation®5
+																																																																																								joueurs et avec lequel tout a commencé, recréé pour la console PlayStation®5
 									</p>
 									<a href="" class="buttun buttun-primary text-primary">PLUS D'INFORMATIONS</a>
 								</div>
@@ -121,7 +161,7 @@
 								<div class="card_body">
 									<h5 class="card-titre">PS5</h5>
 									<p class="card-texte">Plongez dans le futur univers du gaming avec la nouvelle PS5 standard
-																																																										ou la Playstation 5 Digital Edition d'un design à couper le souffle!</p>
+																																																																																								ou la Playstation 5 Digital Edition d'un design à couper le souffle!</p>
 									<a href="#" class="buttun buttun-primary text-primary ">PLUS D'INFORMATIONS</a>
 								</div>
 							</div>
@@ -130,7 +170,7 @@
 								<div class="card_body">
 									<h5 class="card-titre">HALO INFINITE</h5>
 									<p class="card-texte">La légendaire série Halo est de retour. Découvrez la plus vaste
-																																																										campagne Master Chief jamais proposée et vivez une expérience multijoueur gratuite.</p>
+																																																																																								campagne Master Chief jamais proposée et vivez une expérience multijoueur gratuite.</p>
 									<a href="#" class="buttun buttun-primary text-primary">PLUS D'INFORMATIONS</a>
 								</div>
 							</div>
@@ -139,7 +179,7 @@
 								<div class="card_body">
 									<h5 class="card-titre">Card title4</h5>
 									<p class="card-texte">Some quick example text to build on the card title and make up the
-																																																										bulk of the card's content.</p>
+																																																																																								bulk of the card's content.</p>
 									<a href="#" class="buttun buttun-primary">AJOUTER AU PANIER</a>
 								</div>
 							</div>
@@ -148,7 +188,7 @@
 								<div class="card_body">
 									<h5 class="card-titre">Card title5</h5>
 									<p class="card-texte">Some quick example text to build on the card title and make up the
-																																																										bulk of the card's content.</p>
+																																																																																								bulk of the card's content.</p>
 									<a href="#" class="buttun buttun-primary">AJOUTER AU PANIER</a>
 								</div>
 							</div>
@@ -157,7 +197,7 @@
 								<div class="card_body">
 									<h5 class="card-titre">Card title6</h5>
 									<p class="card-texte">Some quick example text to build on the card title and make up the
-																																																										bulk of the card's content.</p>
+																																																																																								bulk of the card's content.</p>
 									<a href="#" class="buttun buttun-primary">AJOUTER AU PANIER</a>
 								</div>
 							</div>
@@ -169,7 +209,7 @@
 								<div class="card_body">
 									<h5 class="card-titre">PACK XBOX SERIES X</h5>
 									<p class="card-texte">Microsoft Xbox Series X. Plateforme: Xbox Series X, Couleur du
-																																																										produit: Noir, Mémoire interne: 16384 Mo. Supports de stockage: SSD.</p>
+																																																																																								produit: Noir, Mémoire interne: 16384 Mo. Supports de stockage: SSD.</p>
 									<a href="#" class="buttun buttun-primary text-primary">PLUS D'INFORMATIONS</a>
 								</div>
 							</div>
@@ -178,7 +218,7 @@
 								<div class="card_body">
 									<h5 class="card-titre">MARIO KART 8</h5>
 									<p class="card-texte">Mario et toute son équipe vous attendent pour de nouvelles aventures
-																																																										sur nintendo. Le multijoueur par excellence, seul ou avec des amis.</p>
+																																																																																								sur nintendo. Le multijoueur par excellence, seul ou avec des amis.</p>
 									<a href="#" class="buttun buttun-primary text-primary">PLUS D'INFORMATIONS</a>
 								</div>
 							</div>
@@ -187,7 +227,7 @@
 								<div class="card_body">
 									<h5 class="card-titre">FIFA 24</h5>
 									<p class="card-texte">Retrouvez le best-seller de jeux de football. Tous les meilleurs
-																																																										joueurs du monde et les plus grandes équipes vous attendent.</p>
+																																																																																								joueurs du monde et les plus grandes équipes vous attendent.</p>
 									<a href="#" class="buttun buttun-primary text-primary">PLUS D'INFORMATIONS</a>
 								</div>
 							</div>
@@ -196,7 +236,7 @@
 								<div class="card_body">
 									<h5 class="card-titre">Card title4</h5>
 									<p class="card-texte">Some quick example text to build on the card title and make up the
-																																																										bulk of the card's content.</p>
+																																																																																								bulk of the card's content.</p>
 									<a href="#" class="buttun buttun-primary">AJOUTER AU PANIER</a>
 								</div>
 							</div>
@@ -205,7 +245,7 @@
 								<div class="card_body">
 									<h5 class="card-titre">Card title5</h5>
 									<p class="card-texte">Some quick example text to build on the card title and make up the
-																																																										bulk of the card's content.</p>
+																																																																																								bulk of the card's content.</p>
 									<a href="#" class="buttun buttun-primary">AJOUTER AU PANIER</a>
 								</div>
 							</div>
@@ -214,7 +254,7 @@
 								<div class="card_body">
 									<h5 class="card-titre">Card title6</h5>
 									<p class="card-texte">Some quick example text to build on the card title and make up the
-																																																										bulk of the card's content.</p>
+																																																																																								bulk of the card's content.</p>
 									<a href="#" class="buttun buttun-primary">AJOUTER AU PANIER</a>
 								</div>
 							</div>

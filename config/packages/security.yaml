@@ -41,7 +41,7 @@ security:
     - { path: ^/admin, roles: ROLE_ADMIN }
     - { path: ^/user, roles: ROLE_ADMIN }
     - { path: ^/role, roles: ROLE_ADMIN }
-
+    - { path: ^/menu, roles: ROLE_ADMIN }
 
   access_denied_url: app_home
 

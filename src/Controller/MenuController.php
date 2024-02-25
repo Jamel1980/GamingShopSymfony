@@ -22,7 +22,6 @@ class MenuController extends AbstractController
         return $this->render('menu/index.html.twig', [
             'controller_name' => 'MenuController',
             'menu' => $menu,
-            'menus'=>$menus
 
         ]);
     }

@@ -55,7 +55,7 @@ class MenuDynamicController extends AbstractController
                 if ($nbreSubMenus != 0) {
                     $html .= "<li class='mx-5 menu-link'><a href='$href'>$libelle</a>";
                 } else {
-                    $html .= "<li><a href='$href'>$icon $libelle</a>";
+                    $html .= "<li class=''><a href='$href'>$icon $libelle</a>";
                 }
                 $niveau_precedent = $niveau;
                 foreach ($subMenus as $subMenu) {

@@ -50,18 +50,6 @@
 									<li>
 										<a href="{{ path('app_logout') }}">LOGOUT</a>
 									</li>
-
-									{% if(is_granted('ROLE_ADMIN'))%}
-										<li>
-											<a href="{{path('app_user_index')}}">USER</a>
-										</li>
-										<li>
-											<a href="{{path('app_role_index')}}">ROLE</a>
-										</li>
-										<li>
-											<a href="{{path('app_menu')}}">Menu</a>
-										</li>
-									{% endif %}
 								</ul>
 							</li>
 						{% else %}

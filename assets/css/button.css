@@ -1,5 +1,4 @@
 .button-container {
-  
   display: flex;
   justify-content: space-around;
   margin: 20px; /* Ajout de marge pour créer de l'espace entre les boutons */

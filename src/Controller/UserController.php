@@ -39,6 +39,7 @@ class UserController extends AbstractController
         $form->add('roles', ChoiceType::class, [
             'choices' => $roles,
             'multiple' => true,
+            'attr' => ['class' => 'form-control']
         ]);
         $form->handleRequest($request);
 
@@ -85,6 +86,7 @@ class UserController extends AbstractController
         $form->add('roles', ChoiceType::class, [
             'choices' => $roles,
             'multiple' => true,
+            'attr' => ['class' => 'form-control']
         ]);
         $form->handleRequest($request);
 

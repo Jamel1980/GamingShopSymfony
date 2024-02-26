@@ -1,66 +1,92 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}User index{% endblock %}
+{% block title %}User index
+{% endblock %}
 
 {% block body %}
-    <h1 class="text-center py-5 ">TABLEAU DE BORDUSERS</h1>
 
-    <table class="table">
-        <div class="button-container">
-            <div class="d-flex justify-content-around ">
-                <button class="button-82-pushable" role="button">
-                    <span class="button-82-shadow"></span>
-                    <span class="button-82-edge"></span>
-                    <span class="button-82-front text">
-                        <a class="text-light" href="{{ path('app_user_new') }}">Ajouter</a>
-                    </span>
-                </button>
-                <button class="button-82-pushable" role="button">
-                    <span class="button-82-shadow"></span>
-                    <span class="button-82-edge"></span>
-                    <span class="button-82-front text">
-                        Afficher
-                    </span>
-                </button>
-                <button class="button-82-pushable" role="button">
-                    <span class="button-82-shadow"></span>
-                    <span class="button-82-edge"></span>
-                    <span class="button-82-front text">
-                        Modifier
-                    </span>
-                </button>
-            </div>
+<h1 class="text-center py-5 ">TABLEAU DE BORD USERS</h1>
+
+<table class="table">
+    <div class="button-container">
+        <div class="d-flex justify-content-around ">
+            <button class="button-82-pushable" role="button" onclick="add()">
+                <span class="button-82-shadow"></span>
+                <span class="button-82-edge"></span>
+                <span class="button-82-front text">
+                    <a class="text-light" href="">Ajouter</a>
+                </span>
+            </button>
+            <button class="button-82-pushable" role="button" onclick="show()">
+                <span class="button-82-shadow"></span>
+                <span class="button-82-edge"></span>
+                <span class="button-82-front text">
+                    Afficher
+                </span>
+            </button>
+            <button class="button-82-pushable" role="button" onclick="modify()">
+                <span class="button-82-shadow"></span>
+                <span class="button-82-edge"></span>
+                <span class="button-82-front text">
+                    Modifier
+                </span>
+            </button>
         </div>
-	</table>
- <div class="table-responsive">
-        <table class="table table-bordered table-striped text-center">
-            <thead class="thead-dark">
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Roles</th>
-                    <th scope="col">Password</th>
-                    <th scope="col">Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for user in users %}
-                <tr>
-                    <th scope="row"><input type="checkbox" class="form-check-input" name="check" onclick="onlyOne(this)"></th>
-                    <td>{{ user.email }}</td>
-                    <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
-                    <td>****</td>
-                    <td>
-                        <a href="{{ path('app_user_show', {'id': user.id}) }}" class="btn btn-info btn-sm">Voir</a>
-                        <a href="{{ path('app_user_edit', {'id': user.id}) }}" class="btn btn-warning btn-sm">Modifier</a>
-                    </td>
-                </tr>
-                {% else %}
-                <tr>
-                    <td colspan="5">Aucun enregistrement trouvé</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+    </div>
+</table>
+<div class="table-responsive">
+    <table class="table table-bordered table-striped text-center">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Email</th>
+                <th scope="col">Roles</th>
+                <th scope="col">Password</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+            <tr>
+                <th scope="row"><input type="checkbox" class="form-check-input" id="{{user.id}}" value="{{user.id}}"
+                        name="check" onclick="onlyOne(this)"></th>
+                <td>{{ user.email }}</td>
+                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
+                <td>****</td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="5">Aucun enregistrement trouvé</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 </div>
+{% block script %}
+<script>
+    const modify = () => {
+        let id = getIdChecked('check');
+        if (id == 0) {
+            alert("Please select Client to modify");
+        } else {
+            let url = "{{ path('app_user_edit',{'id':'id'}) }}"
+            url = url.replace('id', id);
+            document.location.href = url;
+        }
+    }
+    const add = () => {
+        document.location.href = "{{ path('app_user_new') }}";
+    }
+
+    const show = () => {
+        let id = getIdChecked('check');
+        if (id == 0) {
+            alert("Choisir ligne");
+        } else {
+            let url = "{{ path('app_user_show', {'id': 'id'}) }}";
+            url = url.replace('id', id);
+            window.location.href = url;
+        }
+    }
+</script>
+{% endblock %}
 {% endblock %}

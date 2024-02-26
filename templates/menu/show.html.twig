@@ -1,0 +1,52 @@
+{% extends "base.html.twig" %}
+{% block title %}
+Show Menu
+{% endblock %}
+{% block body %}
+<div class="m-auto w50 m-4">
+
+	<h1 class="text-center">Menu</h1>
+	<table class="w100 table">
+
+		<tr>
+			<td class="w30 lab30">CODE</td>
+			<td><input type="text" value="{{ menu.rang }}"></td>
+		</tr>
+		<tr>
+			<td class="w30">LIBELLE</td>
+			<td><input type="text" value="{{ menu.libelle }}"></td>
+		</tr>
+		<tr>
+			<td class="w30">URL</td>
+			<td><input type="text" value="{{ menu.url }}"></td>
+		</tr>
+		<tr>
+			<td class="w30">ICONE</td>
+			<td><input type="text" value="<i class={{menu.icon}}></i>"></td>
+		</tr>
+		<tr>
+			<td class="w30">ROLE</td>
+			<td><input type="text" value="{{ menu.role }}"></td>
+		</tr>
+
+	</table>
+	<div class="button d-flex justify-content-around m-2">
+		<a href="javascript:retour()" class="buttonadd">Retour</a>
+		<a href="javascript:supprimer()" class="buttondelete">Supprimer</a>
+	</div>
+</div>
+{% block script %}
+<script>
+	
+
+	function supprimer() {
+		const response = confirm('Voulez-vous bien supprimer ce menu');
+		if (response) { }
+	}
+
+	function retour() { // document.location.href = "/menu";
+		document.location.href = "{{ path('app_menu') }}";
+	}
+</script>
+{% endblock %}
+{% endblock %}

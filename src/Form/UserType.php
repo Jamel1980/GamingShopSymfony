@@ -14,12 +14,11 @@ class UserType extends AbstractType
     {
         $builder
             ->add('email')
-                ->add('plainPassword', PasswordType::class, [
-                    'mapped' => false,
-                    'label' => 'Mot De Passe', // corrected attribute name
-                    'required'=>false
-                ])
-            ;
+            ->add('plainPassword', PasswordType::class, [
+                'mapped' => false,
+                'label' => 'Mot De Passe', // corrected attribute name
+                'required' => false
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

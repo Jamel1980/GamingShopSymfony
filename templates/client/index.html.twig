@@ -29,32 +29,43 @@
             <!-- Profile Settings -->
             <div class="col-span-12 lg:col-span-4 bg-white shadow rounded-lg p-4">
                 <h2 class="text-lg font-semibold mb-4">Profile Settings</h2>
-                <div class="mb-4">
+                <form class="mb-4" action="" method="post" enctype="multipart/form-data">
                     <div class="buttons">
-
-                        <div class="w-24 h-24 rounded-full bg-gray-300 flex items-center justify-center mx-auto mb-4">
-                            <span class="text-gray-500">Upload</span>
+                        <div
+                            class="w-24 h-24 rounded-full bg-gray-300 flex items-center justify-center mx-auto mb-4 overflow-hidden">
+                            <span class="text-gray-500">
+                                <img id="image_view"
+                                    src="{{ photo is defined ? asset('upload/' ~ photo) : asset('image-site-vitrine/boy.avif') }}"
+                                    alt="" width="" class="img-fluid">
+                            </span>
+                            
                         </div>
-                        <input type="file" value="upload" class="btn btn-success">
+                        <input type="file" value="" id="photo" name="photo" class="btn btn-success"
+                            onchange="previewImage(event,'image_view')">
                     </div>
-
                     <div class="flex flex-col space-y-2">
-                        <label for="name">Name</label>
-                        <input type="text" placeholder="Name" class="border p-2 rounded" id="name">
+                        <label for="name">NOM</label>
+                        <input type="text" class="border p-2 rounded" id="nom" name="nom" value="{{client.nom}}">
+                        <label for="prenom">PRENOM</label>
+                        <input type="text" class="border p-2 rounded" id="prenom" name="prenom"
+                            value="{{client.prenom}}">
                         <label for="name">Email</label>
-                        <input type="email" placeholder="Email" class="border p-2 rounded" id="email">
+                        <input type="email" class="border p-2 rounded" id="email" name="email" value="{{user.email}}">
                         <label for="name">Password</label>
-                        <input type="password" placeholder="Pass" class="border p-2 rounded" id="password">
+                        <input type="password" class="border p-2 rounded" id="password" name="password">
                     </div>
-                </div>
-                <div class="flex justify-between">
-                    <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l">
-                        Return
-                    </button>
-                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-r">
-                        Update
-                    </button>
-                </div>
+                    <div class="flex justify-between">
+                        <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l">
+                            Return
+                        </button>
+                        <button type="submit"
+                            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-r"
+                            onclick="editPhoto()">
+                            Update
+                        </button>
+                    </div>
+                </form>
+
             </div>
 
             <!-- Games Purchased -->
@@ -93,5 +104,17 @@
 </body>
 
 </html>
-
+{% block script %}
+<script>
+    //sent request via ajax to the path {{path('app_client_edit_photo')}}
+    function editPhoto() {
+        var form = document.querySelector('form');
+        var formData = new FormData(form);
+        var xhr = new XMLHttpRequest();
+        const url = "{{path('app_client_edit_photo')}}";
+        xhr.open('POST', url, true);
+        xhr.send(formData);
+    }
+</script>
+{% endblock %}
 {% endblock %}

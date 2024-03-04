@@ -1,11 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello MenuController!
+{% block title %}Menu index
 {% endblock %}
 
 {% block body %}
-{% block stylesheets %}{% endblock %}
-<div class="example-wrapper">
+
+<h1 class="text-center py-5">TABLEAU DE BORD MENU</h1>
+
     <table class="table position-relative">
         <div class="button d-flex justify-content-around m-2">
             <a href="javascript:ajouter()" class="buttonadd">Ajouter</a>
@@ -13,7 +14,10 @@
             <a href="javascript:modifier()" class="buttonmodify">Modifier</a>
             <a href="javascript:supprimer()" class="buttondelete">Supprimer</a>
         </div>
-        <thead>
+    </table>
+<div class="table-responsive">
+    <table class="table table-bordered table-striped text-center">
+        <thead class="thead-dark">
             <tr class=" position-sticky">
                 <th></th>
                 <th>LIBELLE</th>

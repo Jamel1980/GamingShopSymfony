@@ -69,13 +69,12 @@ class RoleController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_role_delete', methods: ['POST'])]
-    public function delete(Request $request, Role $role, EntityManagerInterface $entityManager): Response
+    #[Route('/delete/{id}', name: 'app_role_delete', methods: ['GET','POST'])]
+    public function delete(Request $request, Role $role, EntityManagerInterface $em,$id): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$role->getId(), $request->request->get('_token'))) {
-            $entityManager->remove($role);
-            $entityManager->flush();
-        }
+        $role = $em->getRepository(Role::class)->find($id);
+        $em->remove($role)  ;
+        $em->flush();
 
         return $this->redirectToRoute('app_role_index', [], Response::HTTP_SEE_OTHER);
     }

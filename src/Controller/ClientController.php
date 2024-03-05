@@ -13,6 +13,7 @@ use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class ClientController extends AbstractController
 {
@@ -32,7 +33,7 @@ class ClientController extends AbstractController
     }
     #[Route('/client/edit-photo', name: 'app_client_edit_photo')]
     //! this function edit is using method without creating form object. So method is bit different.
-    public function edit(Request $request, ClientRepository $clientRepository, EntityManagerInterface $em): Response
+    public function edit(Request $request, ClientRepository $clientRepository, EntityManagerInterface $em, UserPasswordHasherInterface $passwordEncoder): Response
     {
         $user = $this->getUser(); // Get the logged-in user
 
@@ -40,7 +41,6 @@ class ClientController extends AbstractController
         if ($request->isMethod('POST')) {
             // Handle the form submission
             $form = $request->request->all();
-
             // Validate the form data
             // ...
 
@@ -50,8 +50,15 @@ class ClientController extends AbstractController
             $client->getUser()->setEmail($form['email']);
             // $nom = $form->get('nom')->getData();
             // $client->setNom($nom);
-            $client->getUser()->setPassword($form['password']);
+            //!only using this will update the user detail but since passsword field is empty then it will update that empty password aswell. 
+            // $client->getUser()->setPassword($form['password']);
 
+            //! here we have direct access to $form['plainPassword'] becuase we have not created form instead in top we used  $form = $request->request->all();
+            $plainpassword = $form['plainPassword'];
+            if (!empty($plainpassword)) {
+                $hashPassword = $passwordEncoder->hashPassword($client->getUser(), $plainpassword);
+                $client->getUser()->setPassword($hashPassword);
+            }
             // Handle the uploaded photo
             $photo = $request->files->get('photo');
             if ($photo) {

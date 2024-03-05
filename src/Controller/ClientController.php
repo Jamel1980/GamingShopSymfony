@@ -50,6 +50,8 @@ class ClientController extends AbstractController
             $client->getUser()->setEmail($form['email']);
             // $nom = $form->get('nom')->getData();
             // $client->setNom($nom);
+
+            
             $client->getUser()->setPassword($form['password']);
 
             // Handle the uploaded photo

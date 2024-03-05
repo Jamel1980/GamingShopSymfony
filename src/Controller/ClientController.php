@@ -1,5 +1,5 @@
 <?php
-
+//! here clientController is for user dashboard
 namespace App\Controller;
 
 use App\Entity\User;
@@ -9,6 +9,7 @@ use App\Repository\ClientRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -32,7 +33,7 @@ class ClientController extends AbstractController
     }
     #[Route('/client/edit-photo', name: 'app_client_edit_photo')]
     //! this function edit is using method without creating form object. So method is bit different.
-    public function edit(Request $request, ClientRepository $clientRepository, EntityManagerInterface $em): Response
+    public function edit(Request $request, ClientRepository $clientRepository, EntityManagerInterface $em, UserPasswordHasherInterface $hash): Response
     {
         $user = $this->getUser(); // Get the logged-in user
 
@@ -51,7 +52,11 @@ class ClientController extends AbstractController
             // $nom = $form->get('nom')->getData();
             // $client->setNom($nom);
 
-            
+            // $plainPassword = $form['plainPassword'];
+            // if(!empty($plainPassword)){
+            //     $hashPassword = $hash->hashPassword($client->getUser(),$plainPassword);
+            //     $client->getUser()->setPassword($hashPassword);
+            // }
             $client->getUser()->setPassword($form['password']);
 
             // Handle the uploaded photo

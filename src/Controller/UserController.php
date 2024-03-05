@@ -98,7 +98,7 @@ class UserController extends AbstractController
             //? so here get('plainPassword') will only retrieves form field but not data. 
             //? So now when user enters data in this form field then getData will retrieve the actual data user has entered and store it in $plainPassword variable.
             $plainPassword = $form->get('plainPassword')->getData();
-            if (!$plainPassword) {
+            if ($plainPassword) {
                 //? hassPassword takes 2 parameter . 1/user entity and 2/plain password
                 $password = $hash->hashPassword($user, $plainPassword);
                 //setPassword is method in User entity to set the password inside database.

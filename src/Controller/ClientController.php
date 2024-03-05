@@ -38,6 +38,7 @@ class ClientController extends AbstractController
         $user = $this->getUser(); // Get the logged-in user
 
         $client = $clientRepository->findOneBy(['user' => $user]); // Get the client associated with the user
+        
         if ($request->isMethod('POST')) {
             // Handle the form submission
             $form = $request->request->all();

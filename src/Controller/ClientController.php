@@ -38,34 +38,48 @@ class ClientController extends AbstractController
         $user = $this->getUser(); // Get the logged-in user
 
         $client = $clientRepository->findOneBy(['user' => $user]); // Get the client associated with the user
-        
+
         if ($request->isMethod('POST')) {
             // Handle the form submission
             $form = $request->request->all();
+            //! Method creating form object
+            // $form = $this->createForm(ClientType::class, $client);
+            // $form->handleRequest($request);
+            // if ($form->isSubmitted() && $form->isValid()) {
+            //     $nom = $form->get('nom')->getData();
+            //     $client->setNom($nom);
+            //     $prenom = $form->get('prenom')->getData();
+            //     $client->setPrenom($prenom);
+            //     $email = $form->get('email')->getData();
+            //     $client->getUser()->setEmail($email);
+            //     $plainPassword = $form->get('plainPassword')->getData();
+            //     if (!empty($plainPassword)) {
+            //         $encodedPassword = $passwordEncoder->hashPassword($client->getUser(), $plainPassword);
+            //         $client->getUser()->setPassword($encodedPassword);
+            //     }
+            // }
             // Validate the form data
             // ...
-
+            //!method without creating form object
             // Update the client's information
             $client->setNom($form['nom']);
             $client->setPrenom($form['prenom']);
             $client->getUser()->setEmail($form['email']);
-            // $nom = $form->get('nom')->getData();
-            // $client->setNom($nom);
             //!only using this will update the user detail but since passsword field is empty then it will update that empty password aswell. 
             // $client->getUser()->setPassword($form['password']);
 
             //! here we have direct access to $form['plainPassword'] becuase we have not created form instead in top we used  $form = $request->request->all();
-            $plainpassword = $form['plainPassword'];
-            if (!empty($plainpassword)) {
-                $hashPassword = $passwordEncoder->hashPassword($client->getUser(), $plainpassword);
-                $client->getUser()->setPassword($hashPassword);
+            if (!empty($form['plainPassword'])) {
+                $plainPassword = $form['plainPassword'];
+                $encodedPassword = $passwordEncoder->hashPassword($client->getUser(), $plainPassword);
+                $client->getUser()->setPassword($encodedPassword);
             }
-            // Handle the uploaded photo
+            //todo Handle the uploaded photo
             $photo = $request->files->get('photo');
             if ($photo) {
                 $originalFilename = pathinfo($photo->getClientOriginalName(), PATHINFO_FILENAME);
                 $newFilename = $originalFilename . '-' . uniqid() . '.' . $photo->guessExtension();
-
+                
                 try {
                     $photo->move(
                         $this->getParameter('upload_directory'), // This should be defined in your config/services.yaml file
@@ -90,50 +104,4 @@ class ClientController extends AbstractController
             'client' => $client, // Pass the client to the template
         ]);
     }
-
-    //! here the uploading and modifying client data is handled using form object.
-    //     public function edit(Request $request, ClientRepository $clientRepository, EntityManagerInterface $em): Response
-    // {
-    //     $user = $this->getUser(); // Get the logged-in user
-
-    //     $client = $clientRepository->findOneBy(['user' => $user]); // Get the client associated with the user
-
-    //     $form = $this->createForm(ClientType::class, $client);
-
-    //     $form->handleRequest($request);
-
-    //     if ($form->isSubmitted() && $form->isValid()) {
-    //         // Handle the form submission
-
-    //         // Handle the uploaded photo
-    //         $photo = $form->get('photo')->getData();
-    //         if ($photo) {
-    //             $originalFilename = pathinfo($photo->getClientOriginalName(), PATHINFO_FILENAME);
-    //             $newFilename = $originalFilename . '-' . uniqid() . '.' . $photo->guessExtension();
-
-    //             try {
-    //                 $photo->move(
-    //                     $this->getParameter('upload_directory'), // This should be defined in your config/services.yaml file
-    //                     $newFilename
-    //                 );
-    //             } catch (FileException $e) {
-    //                 // Handle exception if something happens during file upload
-    //             }
-
-    //             $client->setPhoto($newFilename);
-    //         }
-
-    //         // Save the changes to the database
-    //         $em->persist($client);
-    //         $em->flush();
-
-    //         // Redirect the user to a success page
-    //         return $this->redirectToRoute('app_client_success');
-    //     }
-
-    //     return $this->render('client/edit.html.twig', [
-    //         'client' => $client, // Pass the client to the template
-    //         'form' => $form->createView(),
-    //     ]);
-    // }
 }

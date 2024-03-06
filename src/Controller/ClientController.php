@@ -1,5 +1,5 @@
 <?php
-
+//! here clientController is for user dashboard
 namespace App\Controller;
 
 use App\Entity\User;
@@ -9,11 +9,11 @@ use App\Repository\ClientRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class ClientController extends AbstractController
 {
@@ -33,6 +33,7 @@ class ClientController extends AbstractController
     }
     #[Route('/client/edit-photo', name: 'app_client_edit_photo')]
     //! this function edit is using method without creating form object. So method is bit different.
+
     public function edit(Request $request, ClientRepository $clientRepository, EntityManagerInterface $em, UserPasswordHasherInterface $passwordEncoder): Response
     {
         $user = $this->getUser(); // Get the logged-in user

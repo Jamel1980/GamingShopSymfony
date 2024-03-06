@@ -43,7 +43,7 @@ security:
     - { path: ^/role, roles: ROLE_ADMIN }
     - { path: ^/menu, roles: ROLE_ADMIN }
 
-  access_denied_url: app_home
+  access_denied_url: app_homeit 
 
 when@test:
   security:

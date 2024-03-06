@@ -95,8 +95,8 @@ class UserController extends AbstractController
             //!When user register then password will be hashed but here we are modifying,creating user as admin so password is not hased. Therefore we need to use method to hash password.
             //todo here $form is the instance of form class which is inside Vendor and getData is method inside this class.
             //todo so when user enter password in field then this method below capture the password and stores it inside $plainPassword.
-             //? so here get('plainPassword') will only retrieves form field but not data. 
-             //? So now when user enters data in this form field then getData will retrieve the actual data user has entered and store it in $plainPassword variable.
+            //? so here get('plainPassword') will only retrieves form field but not data. 
+            //? So now when user enters data in this form field then getData will retrieve the actual data user has entered and store it in $plainPassword variable.
             $plainPassword = $form->get('plainPassword')->getData();
             if ($plainPassword) {
                 //? hassPassword takes 2 parameter . 1/user entity and 2/plain password
